@@ -34,16 +34,24 @@ namespace KataPotter
             {
                 //All books are different.
                 var discount = this.GetDiscountOfBooks(numOfDistinctBooks);
-
                 return (books.Count * priceBook) * discount;
             }
 
             var repeatedBooks = GetCountOfRepeatedBooks(books);
 
-            //Repeated books
-            finalPrice = repeatedBooks * priceBook * books.Count;
+            //All books are repeated
+            if(repeatedBooks == 1)
+            {
+                finalPrice =  repeatedBooks * priceBook * books.Count;
+            }
+            else
+            {
+                var diffBooks = books.Count - repeatedBooks;
+                finalPrice = (this.GetDiscountOfBooks(repeatedBooks) * priceBook * repeatedBooks) + (diffBooks * priceBook);
+            }
             return finalPrice;
         }
+
 
         private Int32 GetCountOfRepeatedBooks(List<Book> books)
         {
