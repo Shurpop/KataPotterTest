@@ -10,18 +10,16 @@ namespace KataPotter
     {
         private readonly DiscountsDictionary _discountsPercentage;
 
-        private const Int32 priceBook = 8;
+        private const int priceBook = 8;
 
         public BooksCalculation()
         {
             _discountsPercentage = new DiscountsDictionary();
         }
 
-        public Decimal GetPriceBooks(List<Book> books)
+        public decimal GetPriceBooks(List<Book> books)
         {
-            decimal finalPrice = 0;
-
-            if (!books.Any()) return finalPrice;
+            if (!books.Any()) return 0;
 
             //get the number of different books vs number of equal books by type..
             var numOfDistinctBooks = books.Select(p => p.BookType).Distinct().Count();
@@ -32,28 +30,30 @@ namespace KataPotter
                 return (books.Count * priceBook) * discount;
             }
 
-            var repeatedBooks = GetCountOfRepeatedBooks(books);
-
             //All books are repeated
-            if(repeatedBooks == 1)
-            {
-                finalPrice =  repeatedBooks * priceBook * books.Count;
-            }
-            else
+            return CalculatePriceRepeatedBooks(books);
+        }
+
+        private decimal CalculatePriceRepeatedBooks(List<Book> books)
+        {
+            var repeatedBooks = GetCountOfRepeatedBooks(books);
+            if (repeatedBooks > 1)
             {
                 var diffBooks = books.Count - repeatedBooks;
-                finalPrice = (this.GetDiscountOfBooks(repeatedBooks) * priceBook * repeatedBooks) + (diffBooks * priceBook);
+                return (this.GetDiscountOfBooks(repeatedBooks) * priceBook * repeatedBooks) + (diffBooks * priceBook);
             }
-            return finalPrice;
+           
+            //Only exist one type
+            return repeatedBooks * priceBook * books.Count;
         }
 
 
-        private Int32 GetCountOfRepeatedBooks(List<Book> books)
+        private int GetCountOfRepeatedBooks(List<Book> books)
         {
             return books.GroupBy(p => p.BookType).Count();
         }
 
-        private decimal GetDiscountOfBooks(Int32 numDistintBooks)
+        private decimal GetDiscountOfBooks(int numDistintBooks)
         {
             BooksCombiDicounts combiDicounts = (BooksCombiDicounts)numDistintBooks;
 

@@ -7,6 +7,6 @@ namespace KataPotter
 {
     public interface IBooksCalculation
     {
-        Decimal GetPriceBooks(List<Book> books);
+        decimal GetPriceBooks(List<Book> books);
     }
 }
