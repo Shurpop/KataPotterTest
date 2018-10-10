@@ -41,7 +41,6 @@ namespace KataPotter
         {
             var typesOfBooks = books.GroupBy(p => p.BookType).Count();
             
-
             return books.Count - books.GroupBy(p => p.BookType).Count();
         }
 
