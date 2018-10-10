@@ -17,11 +17,6 @@ namespace KataPotter
             _discountsPercentage = new DiscountsDictionary();
         }
 
-        //private const Decimal twoBooksDiscountFactor = 0.95m;
-        //private const Decimal threeBooksDiscountFactor = 0.90m;
-        //private const Decimal fourBooksDiscountFactor = 0.80m;
-        //private const Decimal fiveBooksDiscountFactor = 0.75m;
-
         public Decimal GetPriceBooks(List<Book> books)
         {
             decimal finalPrice = 0;
