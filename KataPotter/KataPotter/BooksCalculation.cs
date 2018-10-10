@@ -18,8 +18,7 @@ namespace KataPotter
         {
             decimal finalPrice = 0;
 
-            if (!books.Any())
-                return finalPrice;
+            if (!books.Any()) return finalPrice;
 
             //get the number of different books vs number of equal books by type..
             var numOfDistinctBooks = books.Select(p => p.BookType).Distinct().Count();
@@ -32,7 +31,10 @@ namespace KataPotter
                 return (books.Count * priceBook) * discount;
             }
 
+            var repeated = GetCountOfRepeatedBooks(books);
+
             //Repeated..
+
 
 
 
