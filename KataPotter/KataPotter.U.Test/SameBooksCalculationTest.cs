@@ -20,9 +20,9 @@ namespace KataPotter.U.Test
         public void DiscountOf_TwoBooks_Equal()
         {
             // Arrange
-            var book = new Book { BookType = BookType.FirstBook };
-            var book2 = new Book { BookType = BookType.FirstBook };
-            List<Book> books = new List<Book>() { book, book2 };
+            List<Book> books = new BooksBuilder()
+                                 .AddBook(BookType.FirstBook)
+                                 .AddBook(BookType.FirstBook);
 
             //Act
             var price = _booksCalculation.GetPriceBooks(books);
@@ -35,10 +35,10 @@ namespace KataPotter.U.Test
         public void DiscountOf_ThreeBooks_Equal()
         {
             // Arrange
-            var book = new Book { BookType = BookType.FirstBook };
-            var book2 = new Book { BookType = BookType.FirstBook };
-            var book3 = new Book { BookType = BookType.FirstBook };
-            List<Book> books = new List<Book>() { book, book2, book3 };
+            List<Book> books = new BooksBuilder()
+                                 .AddBook(BookType.FirstBook)
+                                 .AddBook(BookType.FirstBook)
+                                 .AddBook(BookType.FirstBook);
 
             //Act
             var price = _booksCalculation.GetPriceBooks(books);

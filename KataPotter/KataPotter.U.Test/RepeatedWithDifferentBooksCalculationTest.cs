@@ -19,15 +19,15 @@ namespace KataPotter.U.Test
         public void DiscountOf_TwoEqualBooks_PlusOne()
         {
             // Arrange
-            var book = new Book { BookType = BookType.FirstBook };
-            var book2 = new Book { BookType = BookType.FirstBook };
-            var book3 = new Book { BookType = BookType.SecondBook };
-            List<Book> books = new List<Book>() { book, book2, book3 };
+            List<Book> books = new BooksBuilder()
+                                 .AddBook(BookType.FirstBook)
+                                 .AddBook(BookType.FirstBook)
+                                 .AddBook(BookType.SecondBook);
 
             //Act
             var price = _booksCalculation.GetPriceBooks(books);
 
-            Assert.Equal(16, price);
+            Assert.Equal(23.2m, price);
         }
     }
 }

@@ -30,8 +30,9 @@ namespace KataPotter.U.Test
         public void DiscountOf_OneBook()
         {
             // Arrange
-            var book = new Book { BookType = BookType.FirstBook };
-            List<Book> books = new List<Book>() { book };
+
+            List<Book> books = new BooksBuilder()
+                                .AddBook(BookType.FirstBook);
 
             //Act
             var price = _booksCalculation.GetPriceBooks(books);
@@ -44,9 +45,10 @@ namespace KataPotter.U.Test
         public void DiscountOf_TwoBooks()
         {
             // Arrange
-            var book = new Book { BookType = BookType.FirstBook };
-            var book2 = new Book { BookType = BookType.SecondBook };
-            List<Book> books = new List<Book>() { book, book2 };
+            List<Book> books = new BooksBuilder()
+                                .AddBook(BookType.FirstBook)
+                                .AddBook(BookType.SecondBook);
+
 
             //Act
             var price = _booksCalculation.GetPriceBooks(books);
@@ -59,12 +61,10 @@ namespace KataPotter.U.Test
         public void DiscountOf_ThreeBooks()
         {
             // Arrange
-            var book = new Book { BookType = BookType.FirstBook };
-            var book2 = new Book { BookType = BookType.SecondBook };
-            var book3 = new Book { BookType = BookType.ThirdBook };
-
-            List<Book> books = new List<Book>() { book, book2, book3 };
-
+            List<Book> books = new BooksBuilder()
+                                .AddBook(BookType.FirstBook)
+                                .AddBook(BookType.SecondBook)
+                                .AddBook(BookType.ThirdBook);
             //Act
             var price = _booksCalculation.GetPriceBooks(books);
 
@@ -74,12 +74,11 @@ namespace KataPotter.U.Test
         [Fact]
         public void DiscountOf_FourBooks()
         {
-            var book = new Book { BookType = BookType.FirstBook };
-            var book2 = new Book { BookType = BookType.SecondBook };
-            var book3 = new Book { BookType = BookType.ThirdBook };
-            var book4 = new Book { BookType = BookType.FourthBook };
-
-            List<Book> books = new List<Book>() { book, book2, book3, book4 };
+            List<Book> books = new BooksBuilder()
+                                .AddBook(BookType.FirstBook)
+                                .AddBook(BookType.SecondBook)
+                                .AddBook(BookType.ThirdBook)
+                                .AddBook(BookType.FourthBook);
 
             //Act
             var price = _booksCalculation.GetPriceBooks(books);
@@ -90,13 +89,12 @@ namespace KataPotter.U.Test
         [Fact]
         public void DiscountOf_FiveBooks()
         {
-            var book = new Book { BookType = BookType.FirstBook };
-            var book2 = new Book { BookType = BookType.SecondBook };
-            var book3 = new Book { BookType = BookType.ThirdBook };
-            var book4 = new Book { BookType = BookType.FourthBook };
-            var book5 = new Book { BookType = BookType.FifthBook };
-
-            List<Book> books = new List<Book>() { book, book2, book3, book4, book5 };
+            List<Book> books = new BooksBuilder()
+                     .AddBook(BookType.FirstBook)
+                     .AddBook(BookType.SecondBook)
+                     .AddBook(BookType.ThirdBook)
+                     .AddBook(BookType.FourthBook)
+                     .AddBook(BookType.FifthBook);
 
             //Act
             var price = _booksCalculation.GetPriceBooks(books);
