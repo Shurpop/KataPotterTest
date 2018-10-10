@@ -43,7 +43,7 @@ namespace KataPotter.U.Test
             //Act
             var price = _booksCalculation.GetPriceBooks(books);
 
-            Assert.Equal(16, price);
+            Assert.Equal(24, price);
         }
 
     }

@@ -40,8 +40,7 @@ namespace KataPotter
         private Int32 GetCountOfRepeatedBooks(List<Book> books)
         {
             var typesOfBooks = books.GroupBy(p => p.BookType).Count();
-            
-            return books.Count - books.GroupBy(p => p.BookType).Count();
+            return typesOfBooks;
         }
 
         private decimal GetDiscountOfBooks(Int32 numDistintBooks)
