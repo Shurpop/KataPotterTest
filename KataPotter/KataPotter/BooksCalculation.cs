@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace KataPotter
 {
-    public class BooksCalculation
+    public class BooksCalculation : IBooksCalculation
     {
         private const Int32 priceBook = 8;
 
@@ -25,24 +25,24 @@ namespace KataPotter
             if (numOfDistinctBooks == books.Count)
             {
                 //All books are different.
-
                 var discount = this.GetDiscountOfBooks(numOfDistinctBooks);
 
                 return (books.Count * priceBook) * discount;
             }
 
-            var repeated = GetCountOfRepeatedBooks(books);
+            var repeatedBooks = GetCountOfRepeatedBooks(books);
 
-            //Repeated..
-
-
-
-
-            return 0;
+            //Repeated books
+            finalPrice = repeatedBooks * priceBook;
+            return finalPrice;
         }
 
         private Int32 GetCountOfRepeatedBooks(List<Book> books)
         {
+            var typesOfBooks = books.GroupBy(p => p.BookType).Count();
+            
+
+
             return books.Count - books.GroupBy(p => p.BookType).Count();
         }
 
@@ -69,7 +69,6 @@ namespace KataPotter
             {
                 return 1;
             }
-
         }
 
     }

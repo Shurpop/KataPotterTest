@@ -5,14 +5,14 @@ using Xunit;
 
 namespace KataPotter.U.Test
 {
-    public class BooksCalculationTest
+    public class DifferentBooksCalculationTest
     {
-        private BooksCalculation _booksCalculation;
+        private readonly IBooksCalculation _booksCalculation;
 
         //All the books are different...
-        public BooksCalculationTest()
+        public DifferentBooksCalculationTest()
         {
-            this._booksCalculation = new BooksCalculation();
+            _booksCalculation = new BooksCalculation();
         }
 
         [Fact]
@@ -52,59 +52,56 @@ namespace KataPotter.U.Test
             var price = _booksCalculation.GetPriceBooks(books);
 
             Assert.Equal(15.2m, price);
-            //Assert of 5% and price ()
         }
-
-        [Fact]
-        public void DiscountOf_TwoBooks_Equal()
-        {
-            // Arrange
-            var book = new Book { BookType = BookType.FirstBook };
-            var book2 = new Book { BookType = BookType.FirstBook };
-            List<Book> books = new List<Book>() { book, book2 };
-
-            //Act
-            var price = _booksCalculation.GetPriceBooks(books);
-
-            Assert.Equal(16, price);
-            //Assert of 5% and price ()
-        }
-
 
 
         [Fact]
         public void DiscountOf_ThreeBooks()
         {
-            //Assert of 10% and price ()
-            throw new NotImplementedException();
+            // Arrange
+            var book = new Book { BookType = BookType.FirstBook };
+            var book2 = new Book { BookType = BookType.SecondBook };
+            var book3 = new Book { BookType = BookType.ThirdBook };
+
+            List<Book> books = new List<Book>() { book, book2, book3 };
+
+            //Act
+            var price = _booksCalculation.GetPriceBooks(books);
+
+            Assert.Equal(21.6m, price);
         }
 
         [Fact]
         public void DiscountOf_FourBooks()
         {
-            //Assert of 20% and price ()
+            var book = new Book { BookType = BookType.FirstBook };
+            var book2 = new Book { BookType = BookType.SecondBook };
+            var book3 = new Book { BookType = BookType.ThirdBook };
+            var book4 = new Book { BookType = BookType.FourthBook };
 
-            throw new NotImplementedException();
+            List<Book> books = new List<Book>() { book, book2, book3, book4 };
+
+            //Act
+            var price = _booksCalculation.GetPriceBooks(books);
+
+            Assert.Equal(25.6m, price);
         }
 
         [Fact]
         public void DiscountOf_FiveBooks()
         {
-            // Arrange
             var book = new Book { BookType = BookType.FirstBook };
-           
+            var book2 = new Book { BookType = BookType.SecondBook };
+            var book3 = new Book { BookType = BookType.ThirdBook };
+            var book4 = new Book { BookType = BookType.FourthBook };
+            var book5 = new Book { BookType = BookType.FifthBook };
 
-            List<Book> books = new List<Book>() { book };
+            List<Book> books = new List<Book>() { book, book2, book3, book4, book5 };
 
             //Act
             var price = _booksCalculation.GetPriceBooks(books);
 
-            //Assert of 0% Price 8
-
-            //Assert.Equal(8, price);
-
-
-            throw new NotImplementedException();
+            Assert.Equal(30, price);
         }
 
     }
