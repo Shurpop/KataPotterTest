@@ -33,7 +33,7 @@ namespace KataPotter
             var repeatedBooks = GetCountOfRepeatedBooks(books);
 
             //Repeated books
-            finalPrice = repeatedBooks * priceBook;
+            finalPrice = repeatedBooks * priceBook * books.Count;
             return finalPrice;
         }
 

@@ -30,5 +30,21 @@ namespace KataPotter.U.Test
             Assert.Equal(16, price);
         }
 
+
+        [Fact]
+        public void DiscountOf_ThreeBooks_Equal()
+        {
+            // Arrange
+            var book = new Book { BookType = BookType.FirstBook };
+            var book2 = new Book { BookType = BookType.FirstBook };
+            var book3 = new Book { BookType = BookType.FirstBook };
+            List<Book> books = new List<Book>() { book, book2, book3 };
+
+            //Act
+            var price = _booksCalculation.GetPriceBooks(books);
+
+            Assert.Equal(16, price);
+        }
+
     }
 }
