@@ -36,6 +36,7 @@ namespace KataPotter
 
         private decimal CalculatePriceRepeatedBooks(List<Book> books)
         {
+            //TODO: refactor to handle 2 or n types of groups
             var repeatedBooks = GetCountOfRepeatedBooks(books);
             if (repeatedBooks > 1)
             {
