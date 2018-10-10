@@ -6,10 +6,10 @@ namespace KataPotter.Entities
 {
     public enum BookType
     {
-        FirstBook,
-        SecondBook,
-        ThirdBook,
-        FourthBook,
-        FifthBook
+        FirstBook = 1,
+        SecondBook = 2,
+        ThirdBook = 3,
+        FourthBook = 4,
+        FifthBook = 5
     }
 }
