@@ -21,37 +21,57 @@ namespace KataPotter
         {
             if (!books.Any()) return 0;
 
-            //get the number of different books vs number of equal books by type..
-            var numOfDistinctBooks = books.Select(p => p.BookType).Distinct().Count();
+            // Get the number of different books vs number of equal books by type..
+            var numOfDistinctBooks = GetCountOfDistinctBooks(books);
+            
             if (numOfDistinctBooks == books.Count)
             {
-                //All books are different.
+                // All books are different.
                 var discount = this.GetDiscountOfBooks(numOfDistinctBooks);
-                return (books.Count * priceBook) * discount;
+                return books.Count * priceBook * discount;
             }
 
-            //All books are repeated
+            // Books repeated more than 1 time
+            //var repeatedBooks
+            //    = books.GroupBy(t => t.BookType).Where(p => p.Count() > 1).SelectMany(s => s).ToList();
+            
             return CalculatePriceRepeatedBooks(books);
         }
 
         private decimal CalculatePriceRepeatedBooks(List<Book> books)
         {
-            //TODO: refactor to handle 2 or n types of groups
             var repeatedBooks = GetCountOfRepeatedBooks(books);
+
+            decimal totalResult = 0;
             if (repeatedBooks > 1)
             {
-                var diffBooks = books.Count - repeatedBooks;
-                return (this.GetDiscountOfBooks(repeatedBooks) * priceBook * repeatedBooks) + (diffBooks * priceBook);
+                //Type of n books repeated.
+                var groupedBooks = books.GroupBy(p => p.BookType).ToList();
+              
+                foreach (var bundleBooks in groupedBooks)
+                {
+                    var discount = this.GetDiscountOfBooks(bundleBooks.Count());
+                    totalResult += discount * priceBook * bundleBooks.Count();
+                }
+
+                //All books - All the repeated boocks
+                var diffBooks = books.Count - groupedBooks.SelectMany(t => t).Count();
+                return totalResult +(diffBooks * priceBook);
             }
-           
+
             //Only exist one type
-            return repeatedBooks * priceBook * books.Count;
+            return priceBook * books.Count;
         }
 
 
         private int GetCountOfRepeatedBooks(List<Book> books)
         {
             return books.GroupBy(p => p.BookType).Count();
+        }
+
+        private int GetCountOfDistinctBooks(List<Book> books)
+        {
+            return books.Select(p => p.BookType).Distinct().Count();
         }
 
         private decimal GetDiscountOfBooks(int numDistintBooks)
@@ -65,6 +85,7 @@ namespace KataPotter
 
             return 1;
         }
+
 
     }
 }

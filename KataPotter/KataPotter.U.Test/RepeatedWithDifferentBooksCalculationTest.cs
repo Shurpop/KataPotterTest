@@ -49,5 +49,46 @@ namespace KataPotter.U.Test
             //Calculation of groups by type is incorrect :(
         }
 
+        [Fact]
+        public void DiscountOf_TwoEqualBooks_Plus_TowEqualsBooks_PlushTwoEqualsBooks()
+        {
+            // Arrange
+            List<Book> books = new BooksBuilder()
+                                 .AddBook(BookType.FirstBook)
+                                 .AddBook(BookType.FirstBook)
+                                 .AddBook(BookType.SecondBook)
+                                 .AddBook(BookType.SecondBook)
+                                 .AddBook(BookType.ThirdBook)
+                                 .AddBook(BookType.ThirdBook);
+            //Act
+            var price = _booksCalculation.GetPriceBooks(books);
+
+            //assert 3 * (8 * 2 * 0.95)
+            Assert.Equal(45.6m, price);
+            //Calculation of groups by type is incorrect :(
+        }
+
+
+
+        [Fact]
+        public void ManyBooks_GetsBestPrice()
+        {
+            // Arrange
+            List<Book> books = new BooksBuilder()
+                                 .AddBook(BookType.FirstBook)
+                                 .AddBook(BookType.FirstBook)
+                                 .AddBook(BookType.SecondBook)
+                                 .AddBook(BookType.SecondBook)
+                                 .AddBook(BookType.ThirdBook)
+                                 .AddBook(BookType.ThirdBook)
+                                 .AddBook(BookType.FourthBook)
+                                 .AddBook(BookType.FifthBook);
+
+            //Act
+            var price = _booksCalculation.GetPriceBooks(books);
+
+            Assert.Equal(51.2m, price);
+        }
+
     }
 }
